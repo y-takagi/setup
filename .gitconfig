@@ -1,0 +1,33 @@
+[user]
+  name = ytakagi
+  email = ytakagi.deb@gmail.com
+
+[color]
+  status = auto
+  diff = auto
+  branch = auto
+  interactive = auto
+  grep = auto
+  ui = auto
+
+[push]
+  default = tracking
+
+[core]
+  excludesfile = ~/.gitignore_global
+  autocrlf = input
+
+[alias]
+  st = status --ignore-submodules=dirty
+  df = diff --ignore-submodules=dirty
+  co = checkout
+  br = branch
+  web = browse-remote
+  lg = log --date=local
+  lgraph = log --oneline --graph --decorate --all --date=local
+  up-sub = submodule foreach 'git pull origin master'
+
+[filter "lfs"]
+	clean = git lfs clean %f
+	smudge = git lfs smudge %f
+	required = true
