@@ -1,5 +1,4 @@
 ## alias
-eval `dircolors ~/.colorrc`
 alias ls='ls --color=auto'
 alias l='ls'
 alias ll='ls -al'
@@ -10,6 +9,7 @@ alias pry='irb'
 alias emacs='emacs -nw'
 alias dm='docker-machine'
 alias dc='docker-compose'
+alias dps='docker ps -a'
 # alias ekill='emacsclient -e "(kill-emacs)"'
 
 ## history
@@ -31,8 +31,6 @@ if [ -d "${HOME}/.bash.d" ] ; then
     done
     unset f
 fi
-# add path to cmd
-export PATH=$HOME/.bash.d/cmd:$PATH
 
 ## prompt
 PS1="[\h@\W\$(__git_ps1)]\$ "
