@@ -1,26 +1,27 @@
+# If not running interactively, don't do anything
 if [ -z "$PS1" ]; then
     return;
 fi
 
 ## alias
-alias ls='ls --color=auto'
+alias dc='docker-compose'
+alias df='df -h'
+alias diff='git diff'
+alias dm='docker-machine'
+alias dps='docker ps -a'
+alias dstat='dstat'
+# alias ekill='emacsclient -e "(kill-emacs)"'
+alias emacs='emacs -nw'
 alias l='ls'
 alias ll='ls -al'
-alias df='df -h'
+alias ls='ls --color=auto'
+alias ps='ps auxf'
 alias tm='tmux a'
-alias diff='git diff'
-alias pry='irb'
-alias emacs='emacs -nw'
-alias dm='docker-machine'
-alias dc='docker-compose'
-alias dps='docker ps -a'
-# alias ekill='emacsclient -e "(kill-emacs)"'
 
 ## history
 HISTSIZE=100000
 HISTCONTROL=ignoreboth
 HISTTIMEFORMAT='%F %T '
-HISTIGNORE='history:ls*:l*:ll*:cd*:fg*:bg*:pwd'
 ## share history
 function share_history {
     history -a
@@ -28,6 +29,9 @@ function share_history {
     history -r
 }
 PROMPT_COMMAND='share_history'
+
+# C-d によるログアウト入力を防止（100回までは無視する）
+IGNOREEOF=100
 
 # load shell scripts
 if [ -d "${HOME}/.bash.d" ] ; then
