@@ -8,7 +8,8 @@
 
 ## PATH
 export LANG=ja_JP.UTF-8
-export EDITOR=emacs
+export ALTERNATE_EDITOR=""
+export EDITOR='emacsclient -t'
 export PATH=$HOME/.cask/bin:$PATH
 # export PATH=$HOME/.bash.d/cmd:$PATH
 
