@@ -1,18 +1,20 @@
 #!/bin/bash
 set -e
 current_path=`pwd`
+repo_path=$(cd $(dirname $0);pwd)
 
 # symbolic link
-ln -sf .bash_profile ~/.bash_profile
-ln -sf .bashrc ~/.bashrc
-ln -sf .bash.d ~/.bash.d
-ln -sf .gitconfig ~/.gitconfig
-ln -sf .tmux.conf ~/.tmux.conf
-ln -sf .peco ~/.peco
+cd ~/
+ln -sf $repo_path/.bash_profile
+ln -sf $repo_path/.bashrc
+ln -sf $repo_path/.bash.d
+ln -sf $repo_path/.gitconfig
+ln -sf $repo_path/.tmux.conf
+ln -sf $repo_path/.peco
 
 # ssh鍵の設定
 mkdir ~/.ssh
-cat id_rsa.pub >> ~/.ssh/authorized_keys
+cat $repo_path/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 
 # cask & emacs

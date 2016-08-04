@@ -14,7 +14,6 @@ alias dstat='dstat'
 alias emacs='emacsclient -t'
 alias l='ls'
 alias ll='ls -al'
-alias ls='ls --color=auto'
 alias ps='ps auxf'
 alias tm='tmux a'
 
