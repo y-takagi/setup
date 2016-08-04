@@ -32,9 +32,6 @@
   smudge = git lfs smudge %f
   required = true
 
-[commit]
-  cleanup = whitespace
-
 [ghq]
   root = ~/.ghq
   root = ~/.go/src
