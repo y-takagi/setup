@@ -1,4 +1,4 @@
-# If not running interactively, don't do anything
+## If not running interactively, don't do anything
 if [ -z "$PS1" ]; then
     return;
 fi
@@ -9,6 +9,7 @@ alias df='df -h'
 alias diff='git diff'
 alias dm='docker-machine'
 alias dps='docker ps -a'
+alias drm='docker rm $(docker ps -f status=exited -q)'
 alias dstat='dstat -Tclmdrn'
 #alias ekill='emacsclient -e "(kill-emacs)"'
 alias emacs='emacsclient -t'
@@ -29,16 +30,19 @@ function share_history {
 }
 PROMPT_COMMAND='share_history'
 
-# C-d によるログアウト入力を防止（100回までは無視する）
+## C-d によるログアウト入力を防止（100回までは無視する）
 IGNOREEOF=100
 
-# load shell scripts
+## Load shell scripts
 if [ -d "${HOME}/.bash.d" ] ; then
     for f in "${HOME}"/.bash.d/source/*.sh ; do
         . "$f" && echo load "$f"
     done
     unset f
 fi
+
+## Load temporary settings
+load_or_create $HOME/.bash.d/local/bashrc.sh
 
 ## prompt
 PS1="[\h@\W\$(__git_ps1)]\$ "
@@ -55,11 +59,11 @@ else
     echo "no ssh-agent"
 fi
 
-if [ -z "$TMUX" -a -z "$STY" ]; then
-    if tmux has-session && tmux list-sessions | egrep -q '.*]$'; then
-        # デタッチ済みセッションが存在する
-        tmux attach && echo "tmux attached session "
-    else
-        tmux new-session && echo "tmux created new session"
-    fi
-fi
+# if [ -z "$TMUX" -a -z "$STY" ]; then
+#     if tmux has-session && tmux list-sessions | egrep -q '.*]$'; then
+#         # デタッチ済みセッションが存在する
+#         tmux attach && echo "tmux attached session "
+#     else
+#         tmux new-session && echo "tmux created new session"
+#     fi
+# fi
