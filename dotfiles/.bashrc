@@ -20,13 +20,13 @@ IGNOREEOF=100
 
 ## Load shell scripts
 if [ -d "${HOME}/.bash.d" ] ; then
-    . $HOME/.bash.d/lib/z/z.sh
+    . $HOME/.bash.d/lib/init.sh
 
     for f in "${HOME}"/.bash.d/source/*.sh ; do
         . "$f"
     done
-    unset f
 
+    unset f
     echo == Loaded scripts under .bash.d/ ==
 fi
 
