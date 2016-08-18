@@ -4,8 +4,8 @@ Initial setup script for new machine.
 # How to use?
 
 ``` shellsession
-git clone https://github.com/y-takagi/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
+git clone https://github.com/y-takagi/setup.git ~/.setup
+cd ~/.setup
 
 ./setup.sh
 ```
