@@ -3,8 +3,8 @@ set -e
 current_path=`pwd`
 repo_path=$(cd $(dirname $0);pwd)
 
-setup_symlink() {
-    for f in $repo_path/symlinks/.[^.]* ; do
+setup_dotfiles() {
+    for f in $repo_path/dotfiles/.[^.]* ; do
         ln -sf $f $HOME/
     done
 }
@@ -29,7 +29,7 @@ setup_peco() {
 }
 
 setup_all() {
-    setup_symlink
+    setup_dotfiles
     setup_ssh
     setup_emacs
     setup_peco
