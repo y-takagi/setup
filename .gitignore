@@ -1,2 +1,2 @@
-.bash.d/local/*
+symlinks/.bash.d/local/*
 !.gitkeep
