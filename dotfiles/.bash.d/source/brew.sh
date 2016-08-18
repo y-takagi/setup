@@ -15,9 +15,3 @@ do
         . $(brew --prefix)/etc/bash_completion.d/${completion}
     fi
 done
-
-## z
-if [ -f `brew --prefix`/etc/profile.d/z.sh ]; then
-    _Z_DATA=$HOME/.zdata/.z
-    . `brew --prefix`/etc/profile.d/z.sh
-fi

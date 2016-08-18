@@ -10,6 +10,7 @@
 export LANG=ja_JP.UTF-8
 export ALTERNATE_EDITOR=""
 export EDITOR='emacsclient -t'
+export _Z_DATA=$HOME/.zdata/.z
 
 ## PATH
 export PATH=$HOME/.cask/bin:$PATH

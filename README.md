@@ -7,5 +7,9 @@ Initial setup script for new machine.
 git clone https://github.com/y-takagi/setup.git ~/.setup
 cd ~/.setup
 
+git submodule update --init --recursive
+
 ./setup.sh
+
+source ~/.bash_profile
 ```
