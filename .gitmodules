@@ -1,3 +1,6 @@
 [submodule "dotfiles/.bash.d/lib/z"]
 	path = dotfiles/.bash.d/lib/z
 	url = https://github.com/rupa/z.git
+[submodule "dotfiles/.bash.d/lib/dircolors-solarized"]
+	path = dotfiles/.bash.d/lib/dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized.git

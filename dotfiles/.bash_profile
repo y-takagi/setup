@@ -3,16 +3,17 @@
 #
 . ~/.bash.d/common.sh
 
-## color of ls
-# export CLICOLOR=1
-# export LSCOLORS=DxGxcxdxCxegedabagacad
-
 export LANG=ja_JP.UTF-8
 export LESS='-g -i -M -R'
 export ALTERNATE_EDITOR=""
 export EDITOR='emacsclient -t'
 export _Z_DATA=$HOME/.zdata/.z
 
+if [ "$(uname)" == 'Darwin' ]; then
+    eval $(gdircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal)
+elif [ "$(uname)" == 'Linux' ]; then
+    eval $(dircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal)
+fi
 
 ## PATH
 export PATH=$HOME/.cask/bin:$PATH

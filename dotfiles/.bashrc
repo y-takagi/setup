@@ -33,6 +33,12 @@ fi
 ## Load temporary settings
 load_or_create $HOME/.bash.d/local/bashrc.sh
 
+if [ "$(uname)" == 'Darwin' ]; then
+    alias l='gls --color=auto'
+elif [ "$(uname)" == 'Linux' ]; then
+    alias l='ls --color=auto'
+fi
+
 ## alias
 alias dc='docker-compose'
 alias df='df -h'
@@ -43,8 +49,7 @@ alias drm='docker rm $(docker ps -f status=exited -q)'
 alias dstat='dstat -Tclmdrn'
 alias ekill='emacsclient -e "(kill-emacs)"'
 alias emacs='emacsclient -t'
-alias l='ls'
-alias ll='ls -al'
+alias ll='l -al'
 alias ps='ps aux'
 alias repo='cd $(ghq list -p | peco)'
 alias s='ssh $(grep "^Host" ~/.ssh/config|peco|awk "{print \$2}")'
