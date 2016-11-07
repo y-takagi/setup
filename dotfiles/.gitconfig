@@ -1,5 +1,5 @@
 [user]
-  name = ytakagi
+  name = y-takagi
   email = ytakagi.deb@gmail.com
 
 [color]
@@ -29,11 +29,6 @@
   lg = log --date=local
   lgraph = log --oneline --graph --decorate --all --date=local
   up-sub = submodule foreach 'git pull origin master'
-
-[filter "lfs"]
-  clean = git lfs clean %f
-  smudge = git lfs smudge %f
-  required = true
 
 [ghq]
   root = ~/.ghq

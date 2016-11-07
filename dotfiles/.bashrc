@@ -55,4 +55,5 @@ bind -x '"\C-r": peco_history'
 bind -x '"\C-xj": pcd'
 
 ## prompt
-PS1="[\h@\W\$(__git_ps1)]\$ "
+PROMPT_DIRTRIM=2
+PS1="[\w\$(__git_ps1)]\$ "

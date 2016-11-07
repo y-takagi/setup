@@ -2,12 +2,12 @@ if ! which docker > /dev/null; then
     return;
 fi
 
-ruby_cmds=("ruby")
+ruby_cmds=("ruby" "irb" "bundle")
 node_cmds=("node" "npm")
 
 declare -A imageCmdsMap
 imageCmdsMap=( \
-    ["ytakagi/bundler:2.3-slim"]=${ruby_cmds[@]} \
+    ["ytakagi/ruby:2.3-slim"]=${ruby_cmds[@]} \
     ["node:6.4.0-slim"]=${node_cmds[@]} \
 )
 

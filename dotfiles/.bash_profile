@@ -8,9 +8,11 @@
 # export LSCOLORS=DxGxcxdxCxegedabagacad
 
 export LANG=ja_JP.UTF-8
+export LESS='-g -i -M -R'
 export ALTERNATE_EDITOR=""
 export EDITOR='emacsclient -t'
 export _Z_DATA=$HOME/.zdata/.z
+
 
 ## PATH
 export PATH=$HOME/.cask/bin:$PATH
