@@ -21,7 +21,7 @@ IGNOREEOF=100
 ## Load shell scripts
 if [ -d "${HOME}/.bash.d" ] ; then
     # clear generated cmds
-    rm $HOME/.bash.d/gen_cmd/*
+    rm $HOME/.bash.d/gen_cmd/* > /dev/null 2>&1
 
     . $HOME/.bash.d/lib/init.sh
     for f in "${HOME}"/.bash.d/source/*.sh ; do
