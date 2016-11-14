@@ -15,9 +15,18 @@ elif [ "$(uname)" == 'Linux' ]; then
     eval $(dircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal)
 fi
 
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)"
+fi
+
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)";
+fi
+
 ## PATH
 export PATH=$HOME/.cask/bin:$PATH
 export PATH=$HOME/.bash.d/cmd:$PATH
+export PATH=$HOME/.bash.d/gen_cmd:$PATH
 
 ## Load temporary settings
 load_or_create $HOME/.bash.d/local/profile.sh
