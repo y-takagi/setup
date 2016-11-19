@@ -8,6 +8,7 @@ export LESS='-g -i -M -R'
 export ALTERNATE_EDITOR=""
 export EDITOR='emacsclient -t'
 export _Z_DATA=$HOME/.zdata/.z
+export GOPATH=$HOME/.go
 
 if [ "$(uname)" == 'Darwin' ]; then
     eval $(gdircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal)
@@ -24,6 +25,7 @@ if which pyenv > /dev/null; then
 fi
 
 ## PATH
+export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.cask/bin:$PATH
 export PATH=$HOME/.bash.d/cmd:$PATH
 export PATH=$HOME/.bash.d/gen_cmd:$PATH
