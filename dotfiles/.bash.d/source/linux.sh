@@ -1,4 +1,4 @@
-if [ "$(uname)" == 'Darwin' ]; then
+if [ ! "$(uname)" == 'Linux' ]; then
     return
 fi
 
