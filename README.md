@@ -1,5 +1,5 @@
 # What is this?
-Initial setup script for new machine.
+Initial setup script for my new machine.
 
 # How to use?
 
