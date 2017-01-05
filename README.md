@@ -1,7 +1,11 @@
-# What is this?
+# Setup
 Initial setup script for my new machine.
 
-# How to use?
+## Requirements
+- git
+- wget
+
+## Usage
 
 ``` shellsession
 git clone https://github.com/y-takagi/setup.git ~/.setup
