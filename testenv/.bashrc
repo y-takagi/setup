@@ -24,7 +24,7 @@ alias ekill='emacsclient -e "(kill-emacs)"'
 alias emacs='emacsclient -t'
 alias l='ls --color=auto'
 alias ll='l -al'
-alias ps='ps aux'
+alias ps='ps auxf'
 
 ## function
 peco_history() {
