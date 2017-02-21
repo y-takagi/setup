@@ -21,7 +21,7 @@ IGNOREEOF=100
 ## Load shell scripts
 if [ -d "${HOME}/.bash.d" ] ; then
     # clear generated cmds
-    rm $HOME/.bash.d/gen_cmd/* > /dev/null 2>&1
+    rm -f $HOME/.bash.d/gen_cmd/* > /dev/null 2>&1
 
     . $HOME/.bash.d/lib/init.sh
     for f in "${HOME}"/.bash.d/source/*.sh ; do
@@ -36,8 +36,10 @@ load_or_create $HOME/.bash.d/local/bashrc.sh
 
 if [ "$(uname)" == 'Darwin' ]; then
     alias l='gls --color=auto'
+    alias ps='ps aux'
 elif [ "$(uname)" == 'Linux' ]; then
     alias l='ls --color=auto'
+    alias ps='ps auxf'
 fi
 
 ## alias
@@ -51,7 +53,6 @@ alias dstat='dstat -Tclmdrn'
 alias ekill='emacsclient -e "(kill-emacs)"'
 alias emacs='emacsclient -t'
 alias ll='l -al'
-alias ps='ps aux'
 alias repo='cd $(ghq list -p | peco)'
 alias s='ssh $(grep "^Host" ~/.ssh/config|peco|awk "{print \$2}")'
 alias tm='tmux a'

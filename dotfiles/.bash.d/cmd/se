@@ -1,0 +1,32 @@
+#!/bin/bash
+set -e
+
+while getopts o: opt
+do
+    case $opt in
+        o) docker_option=$OPTARG
+           ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+image=$1
+cmd=$2
+
+# create 'home' volume if it doesn't exist
+volume=`docker volume ls -q | grep -e "^home$"` && :
+if [ -z "$volume" ]; then
+    docker volume create home
+fi
+
+# exec if container is already running
+container_id=`docker ps -f name=$image -q`
+if [ "$image" != "testenv" ]; then
+    name_option="--name $image"
+fi
+
+if [ "$image" = "testenv" ] || [ -z "$container_id" ]; then
+    exec docker run --rm -it -h $image -v home:/home/debian $name_option $docker_option $image $cmd
+else
+    exec docker exec -it $container_id bash
+fi
