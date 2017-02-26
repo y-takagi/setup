@@ -22,8 +22,8 @@ alias df='df -h'
 alias diff='git diff'
 alias ekill='emacsclient -e "(kill-emacs)"'
 alias emacs='emacsclient -t'
-alias l='ls --color=auto'
-alias ll='l -al'
+alias l='ls --color=auto --group-directories-first'
+alias ll='l -ahl --time-style long-iso'
 alias ps='ps auxf'
 
 ## function

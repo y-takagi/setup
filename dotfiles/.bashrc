@@ -35,10 +35,10 @@ fi
 load_or_create $HOME/.bash.d/local/bashrc.sh
 
 if [ "$(uname)" == 'Darwin' ]; then
-    alias l='gls --color=auto'
+    ls_cmd='gls'
     alias ps='ps aux'
 elif [ "$(uname)" == 'Linux' ]; then
-    alias l='ls --color=auto'
+    ls_cmd='ls'
     alias ps='ps auxf'
 fi
 
@@ -52,7 +52,8 @@ alias drm='docker rm $(docker ps -f status=exited -q)'
 alias dstat='dstat -Tclmdrn'
 alias ekill='emacsclient -e "(kill-emacs)"'
 alias emacs='emacsclient -t'
-alias ll='l -al'
+alias l='$ls_cmd --color=auto --group-directories-first'
+alias ll='l -ahl --time-style long-iso'
 alias repo='cd $(ghq list -p | peco)'
 alias s='ssh $(grep "^Host" ~/.ssh/config|peco|awk "{print \$2}")'
 alias tm='tmux a'
