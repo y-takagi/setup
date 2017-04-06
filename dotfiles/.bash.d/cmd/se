@@ -10,8 +10,16 @@ do
 done
 shift $((OPTIND - 1))
 
-image=$1
+image_and_tag=$1
 cmd=$2
+
+# split $image_and_tag to $image and $tag process
+IFS_ORIGINAL=$IFS
+IFS=':'
+set -- ${image_and_tag}
+image=$1
+tag=$2
+IFS=$IFS_ORIGINAL
 
 # create 'home' volume if it doesn't exist
 volume=`docker volume ls -q | grep -e "^home$"` && :
@@ -20,13 +28,16 @@ if [ -z "$volume" ]; then
 fi
 
 # exec if container is already running
-container_id=`docker ps -f name=$image -q`
+container_id=`docker ps -f name=$image-$tag -q`
 if [ "$image" != "testenv" ]; then
-    name_option="--name $image"
+    name_option="--name $image-$tag"
 fi
 
+# look for ssh-agent path
+agent_path=`readlink $HOME/.ssh/agent`
+
 if [ "$image" = "testenv" ] || [ -z "$container_id" ]; then
-    exec docker run --rm -it -h $image -v home:/home/debian $name_option $docker_option $image $cmd
+    exec docker run --rm -it -h $image $name_option -v home:/home/debian -v $agent_path:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent $docker_option $image_and_tag $cmd
 else
     exec docker exec -it $container_id bash
 fi
