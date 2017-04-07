@@ -22,4 +22,3 @@ if which brew > /dev/null; then
         fi
     done
 fi
-

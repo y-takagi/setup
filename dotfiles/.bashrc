@@ -34,7 +34,7 @@ fi
 ## Load temporary settings
 load_or_create $HOME/.bash.d/local/bashrc.sh
 
-if [ "$(uname)" == 'Darwin' ]; then
+if [ "$(uname)" == 'Darwin' ] || [ "$(uname)" == 'FreeBSD' ]; then
     ls_cmd='gls'
     alias ps='ps aux'
 elif [ "$(uname)" == 'Linux' ]; then
@@ -64,4 +64,8 @@ bind -x '"\C-xj": pcd'
 
 ## prompt
 PROMPT_DIRTRIM=2
-PS1="[\w\$(__git_ps1)]\$ "
+if type __git_ps1 &> /dev/null; then
+    PS1="[\h@\w\$(__git_ps1)]\$ "
+else
+    PS1="[\h@\w]\$ "
+fi
