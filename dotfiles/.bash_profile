@@ -13,7 +13,7 @@ export GOPATH=$HOME/.go
 if [ "$(uname)" == 'Darwin' ] || [ "$(uname)" == 'FreeBSD' ]; then
     eval $(gdircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal)
 elif [ "$(uname)" == 'Linux' ]; then
-    eval $(dircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal)
+    eval $(dircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal --sh)
 fi
 
 if which rbenv > /dev/null; then
@@ -22,6 +22,10 @@ fi
 
 if which pyenv > /dev/null; then
     eval "$(pyenv init -)";
+fi
+
+if which direnv > /dev/null; then
+    eval "$(direnv hook bash)"
 fi
 
 ## PATH
