@@ -31,6 +31,9 @@ if [ -d "${HOME}/.bash.d" ] ; then
     echo == Loaded scripts under .bash.d/ ==
 fi
 
+## Remove duplicates in PATH
+pathctl_uniq
+
 ## Load temporary settings
 load_or_create $HOME/.bash.d/local/bashrc.sh
 

@@ -4,3 +4,6 @@
 [submodule "dotfiles/.bash.d/lib/dircolors-solarized"]
 	path = dotfiles/.bash.d/lib/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git
+[submodule "dotfiles/.bash.d/lib/sh-pathctl"]
+	path = dotfiles/.bash.d/lib/sh-pathctl
+	url = https://github.com/key-amb/sh-pathctl.git

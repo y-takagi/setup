@@ -1,7 +1,0 @@
-{
-    "Style": {
-        "Basic": ["on_default", "default"],
-        "Selected": ["on_cyan", "white"],
-        "Matched": ["magenta"]
-    }
-}
