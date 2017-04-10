@@ -1,7 +1,7 @@
 #
 # 環境変数を設定
 #
-. ~/.bash.d/common.sh
+. ~/.bash.d/util.sh
 
 export LANG=ja_JP.UTF-8
 export LESS='-g -i -M -R'
