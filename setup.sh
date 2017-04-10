@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 current_path=`pwd`
 repo_path=$(cd $(dirname $0);pwd)
