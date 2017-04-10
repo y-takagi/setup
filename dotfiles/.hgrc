@@ -1,0 +1,10 @@
+[ui]
+username = ytakagi <ytakagi.deb@gmail.com>
+ignore = ~/.hgignore_global
+
+[pager]
+pager = less
+quiet = True
+
+[extensions]
+hgext.pager=
