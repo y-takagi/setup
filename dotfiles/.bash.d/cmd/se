@@ -39,5 +39,5 @@ agent_path=`readlink $HOME/.ssh/agent`
 if [ "$image" = "testenv" ] || [ -z "$container_id" ]; then
     exec docker run --rm -it -h $image $name_option -v home:/home/debian -v $agent_path:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent $docker_option $image_and_tag $cmd
 else
-    exec docker exec -it $container_id bash
+    exec docker exec -it $container_id bash --login
 fi
