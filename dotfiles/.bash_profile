@@ -24,14 +24,11 @@ if which pyenv > /dev/null; then
     eval "$(pyenv init -)";
 fi
 
-if which direnv > /dev/null; then
-    eval "$(direnv hook bash)"
-fi
-
 ## PATH
 export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.bash.d/cmd:$PATH
 export PATH=$HOME/.bash.d/gen_cmd:$PATH
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 ## Load temporary settings
 load_or_create $HOME/.bash.d/local/profile.sh

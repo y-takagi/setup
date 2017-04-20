@@ -31,6 +31,10 @@ if [ -d "${HOME}/.bash.d" ] ; then
     echo == Loaded scripts under .bash.d/ ==
 fi
 
+if which direnv > /dev/null; then
+    eval "$(direnv hook bash)"
+fi
+
 ## Remove duplicates in PATH
 pathctl_uniq
 
@@ -67,8 +71,4 @@ bind -x '"\C-xj": pcd'
 
 ## prompt
 PROMPT_DIRTRIM=2
-if type __git_ps1 &> /dev/null; then
-    PS1="[\h@\w\$(__git_ps1)]\$ "
-else
-    PS1="[\h@\w]\$ "
-fi
+PS1="[\h@\w\$(git_branch)\$(hg_branch)]\$ "

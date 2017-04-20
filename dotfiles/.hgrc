@@ -2,9 +2,14 @@
 username = ytakagi <ytakagi.deb@gmail.com>
 ignore = ~/.hgignore_global
 
+[alias]
+br = branch
+
+[extensions]
+pager=
+color=
+graphlog =
+
 [pager]
 pager = less
 quiet = True
-
-[extensions]
-hgext.pager=
