@@ -4,10 +4,11 @@ ignore = ~/.hgignore_global
 
 [alias]
 br = branches
-glog = log -G --template "[{if(branch, '{branch}','default')}] \033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\n[{date|isodate}] {author}\n{desc|strip|fill68|tabindent}\n\n"
-lg = log -b . --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n"
-dlog = log -p -r $1 --stat --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nBranch: {if(branch, '{branch}','default')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\033[31m---\033[0m\n"
-clog = log --template "{node|short} {date|isodate} [{if(branch, '{branch}','default')}] {desc|strip|firstline}\n"
+fetch = pull
+plog = log -p -r $1 --stat --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nBranch: {if(branch, '{branch}','default')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\033[31m---\033[0m\n"
+slog = log --template "{node|short} {date|isodate} [{if(branch, '{branch}','default')}] {desc|strip|firstline}\n"
+gitlog = log -b . --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n"
+log = log -G --template "\x1B[33m{node|short} ({phase}) \x1B[0m- {desc|strip|firstline} \033[0;36m<{author|person}> \033[0m[{date|shortdate}] \033[42m\033[1;37m{if(branch, ' {branch} ',' default ')}\033[0m{if(tags, ' \033[41m\033[1;37m {tags} \033[0m','')}"
 
 [extensions]
 pager=
@@ -15,6 +16,6 @@ color=
 graphlog =
 
 [pager]
-pager = LESS='-R' less
+pager = LESS='FSRX' less
 quiet = True
-attend = help, diff, log, glog, lg, dlog
+attend = help, diff, log, slog, plog, gitlog
