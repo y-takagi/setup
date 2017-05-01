@@ -63,7 +63,7 @@ alias gh='hg plog $(hg slog | peco | awk "{print \$1}")'
 alias l='$ls_cmd --color=auto --group-directories-first'
 alias ll='l -ahl --time-style long-iso'
 alias repo='cd $(ghq list -p | peco)'
-alias s='ssh $(grep -h "^Host" ~/.ssh/config ~/.ssh/conf.d/* | peco | awk "{print \$2}")'
+alias s='ssh $(grep -h "^Host" ~/.ssh/config | peco | awk "{print \$2}")'
 alias tm='tmux a'
 
 ## bind
