@@ -7,6 +7,7 @@ export LANG=ja_JP.UTF-8
 export LESS='-g -i -M -R'
 export ALTERNATE_EDITOR=""
 export EDITOR='emacsclient -t'
+export PAGER=less
 export _Z_DATA=$HOME/.zdata/.z
 export GOPATH=$HOME/.go
 
