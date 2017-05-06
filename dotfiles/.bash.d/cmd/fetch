@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+
+while getopts o: opt
+do
+    case $opt in
+        o) output=$OPTARG
+           ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+file=$1
+filename=`basename $file`
+
+if [ -n "$output" ]; then
+    if [ -d "$output" ]; then
+        output=$(cd $output; pwd)
+        output+="/$filename"
+    fi
+    command="-o $output"
+fi
+
+curl $command $file
