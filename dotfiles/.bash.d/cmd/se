@@ -34,7 +34,7 @@ if [ "$image" != "base-buildpack" ]; then
 fi
 
 if [ "$image" = "base-buildpack" ] || [ -z "$container_id" ]; then
-    if [ "$(uname)" == 'Darwin']; then
+    if [ "$(uname)" == "Darwin" ]; then
         exec docker run --rm -it -u debian -w /home/debian -h $image $name_option -v home:/home/debian -v $HOME/.ssh:/home/debian/.ssh -v $HOME/Development/Docker:/macOS $docker_option $image_and_tag $cmd
     else
         # look for ssh-agent path

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+exec 2> /dev/null
+
+current_path=`pwd`
+
+if which direnv > /dev/null; then
+    echo "path_add PYTHONUSERBASE .pip" > $current_path/.envrc
+    direnv allow .
+else
+    echo "direnv: command not found"
+fi
