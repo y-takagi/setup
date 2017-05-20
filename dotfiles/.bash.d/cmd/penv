@@ -5,11 +5,11 @@ exec 2> /dev/null
 current_path=`pwd`
 
 if which direnv > /dev/null; then
-    cat <<- EOF > $current_path/.envrc
-    path_add PYTHONUSERBASE .pip
-    PATH_add .pip/bin
-    EOF
-    direnv allow .
+cat <<- EOF > $current_path/.envrc
+path_add PYTHONUSERBASE .pip
+PATH_add .pip/bin
+EOF
+direnv allow .
 else
     echo "direnv: command not found"
 fi
