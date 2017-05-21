@@ -29,22 +29,27 @@ fi
 export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.bash.d/cmd:$PATH
 export PATH=$HOME/.bash.d/gen_cmd:$PATH
-export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 ## Load temporary settings
 load_or_create $HOME/.bash.d/local/profile.sh
 
 ## Keep SSH_AUTH_SOCK to see same path
-agent="$HOME/.ssh/agent"
-if [ -S "$SSH_AUTH_SOCK" ]; then
-    case $SSH_AUTH_SOCK in
-        /tmp/*/agent.[0-9]*)
-            ln -snf "$SSH_AUTH_SOCK" $agent && export SSH_AUTH_SOCK=$agent
-    esac
-elif [ -S $agent ]; then
-    export SSH_AUTH_SOCK=$agent
-else
-    echo "no ssh-agent"
+# agent="$HOME/.ssh/agent"
+# if [ -S "$SSH_AUTH_SOCK" ]; then
+#     case $SSH_AUTH_SOCK in
+#         /tmp/*/agent.[0-9]*)
+#             ln -snf "$SSH_AUTH_SOCK" $agent && export SSH_AUTH_SOCK=$agent
+#     esac
+# elif [ -S $agent ]; then
+#     export SSH_AUTH_SOCK=$agent
+# else
+#     echo "no ssh-agent"
+# fi
+
+## Setup keychain
+if which keychain > /dev/null; then
+    keychain --nogui -q $HOME/.ssh/id_rsa $HOME/.ssh/github_id_rsa $HOME/.ssh/bitbucket_id_rsa
+    source $HOME/.keychain/$HOSTNAME-sh
 fi
 
 ## Load .bashrc
