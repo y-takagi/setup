@@ -9,14 +9,19 @@ undo = revert --no-backup
 plog = log -p -r $1 --stat --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nBranch: {if(branch, '{branch}','default')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\033[31m---\033[0m\n"
 slog = log --template "{node|short} {date|isodate} [{if(branch, '{branch}','default')}] {desc|strip|firstline}\n"
 gitlog = log -b . --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n"
-log = log -G --template "\x1B[33m{rev}:{node|short} \033[42m\033[1;37m{if(branch, ' {branch} ',' default ')}\033[0m{if(tags, ' \033[41m\033[1;37m {tags} \033[0m','')}\033[0m - {desc|strip|firstline} \033[0;36m<{author|person}> \033[0m[{date|shortdate}]"
+log = log -G --template "\033[1;33mchangeset:   {rev}:{node|short} {tbranch} {tbookmarks} {ttags}\033[0m\nuser:        {author}\ndate:        {date|isodate}\nsummary:     {desc|strip|firstline}\n\n"
+
+[templatealias]
+tbranch = "{if(branch, '\033[42m\033[1;37m {branch} \033[0m','\033[42m\033[1;37m default \033[0m')}"
+tbookmarks = "\033[46m\033[1;37m{if(bookmarks, ' {join(bookmarks, ' \033[0m \033[46m\033[1;37m ')} ','')}\033[0m"
+ttags = "\033[45m\033[1;37m{if(tags, ' {join(tags, ' \033[0m \033[45m\033[1;37m ')} ','')}\033[0m"
 
 [extensions]
 pager=
 color=
-graphlog =
+graphlog=
+shelve=
 
 [pager]
 pager = LESS='FSRX' less
 quiet = True
-attend = help, diff, log, slog, plog, gitlog
