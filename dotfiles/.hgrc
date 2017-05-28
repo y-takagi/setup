@@ -10,6 +10,7 @@ plog = log -p -r $1 --stat --template "\033[0;33mcommit: {node|short}\033[0m \03
 slog = log --template "{node|short} {date|isodate} [{if(branch, '{branch}','default')}] {desc|strip|firstline}\n"
 gitlog = log -b . --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n"
 log = log -G --template "\033[1;33mchangeset:   {rev}:{node|short} {tbranch} {tbookmarks} {ttags}\033[0m\nuser:        {author}\ndate:        {date|isodate}\nsummary:     {desc|strip|firstline}\n\n"
+remote = !$HG pull && $HG update $($HG identify --id $(hg paths default)#$1)
 
 [templatealias]
 tbranch = "{if(branch, '\033[42m\033[1;37m {branch} \033[0m','\033[42m\033[1;37m default \033[0m')}"
