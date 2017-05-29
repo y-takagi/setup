@@ -8,8 +8,8 @@ fetch = pull
 undo = revert --no-backup
 plog = log -p -r $1 --stat --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nBranch: {if(branch, '{branch}','default')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\033[31m---\033[0m\n"
 slog = log --template "{node|short} {date|isodate} [{if(branch, '{branch}','default')}] {desc|strip|firstline}\n"
-gitlog = log -b . --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n"
-log = log -G --template "\033[1;33mchangeset:   {rev}:{node|short} {tbranch} {tbookmarks} {ttags}\033[0m\nuser:        {author}\ndate:        {date|isodate}\nsummary:     {desc|strip|firstline}\n\n"
+llog = log -G --template "\033[1;33mchangeset:   {rev}:{node|short} {tbranch} {tbookmarks} {ttags}\033[0m\nuser:        {author}\ndate:        {date|isodate}\nsummary:     {desc|strip|firstline}\n\n"
+log = log -b . --template "\033[0;33mcommit: {node|short} {tbookmarks} {ttags}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n"
 remote = !$HG pull && $HG update $($HG identify --id $(hg paths default)#$1)
 
 [templatealias]
