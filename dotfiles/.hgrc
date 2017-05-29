@@ -6,21 +6,15 @@ ignore = ~/.hgignore_global
 br = branches
 fetch = pull
 undo = revert --no-backup
-plog = log -p -r $1 --stat --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nBranch: {if(branch, '{branch}','default')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\033[31m---\033[0m\n"
-slog = log --template "{node|short} {date|isodate} [{if(branch, '{branch}','default')}] {desc|strip|firstline}\n"
-llog = log -G --template "\033[1;33mchangeset:   {rev}:{node|short} {tbranch} {tbookmarks} {ttags}\033[0m\nuser:        {author}\ndate:        {date|isodate}\nsummary:     {desc|strip|firstline}\n\n"
-log = log -b . --template "\033[0;33mcommit: {node|short} {tbookmarks} {ttags}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n"
 remote = !$HG pull && $HG update $($HG identify --id $(hg paths default)#$1)
-
-[templatealias]
-tbranch = "{if(branch, '\033[42m\033[1;37m {branch} \033[0m','\033[42m\033[1;37m default \033[0m')}"
-tbookmarks = "\033[46m\033[1;37m{if(bookmarks, ' {join(bookmarks, ' \033[0m \033[46m\033[1;37m ')} ','')}\033[0m"
-ttags = "\033[45m\033[1;37m{if(tags, ' {join(tags, ' \033[0m \033[45m\033[1;37m ')} ','')}\033[0m"
+#slog = log --template "{node|short} {date|isodate} [{if(branch, '{branch}','default')}] {desc|strip|firstline}\n"
+#llog = log -G --template "\033[1;33mchangeset:   {rev}:{node|short} {tbranch} {tbookmarks} {ttags}\033[0m\nuser:        {author}\ndate:        {date|isodate}\nsummary:     {desc|strip|firstline}\n\n"
+plog = log -p -r $1 --stat --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nBranch: {if(branch, '{branch}','default')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\033[31m---\033[0m\n"
+glog = !$HG log -G -b . --template "\033[1;33mcommit: {rev}:{node|short}{if(bookmarks, ' \033[46m\033[1;37m ', '')}{join(bookmarks, ' \033[0m \033[46m\033[1;37m ')}{if(bookmarks, ' \033[0m', '')}{if(tags, ' \033[45m\033[1;37m ', '')}{join(tags, ' \033[0m \033[45m\033[1;37m ')}{if(tags, ' \033[0m', '')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n" -r ::$(hg_current_rev)
 
 [extensions]
 pager=
 color=
-graphlog=
 shelve=
 strip=
 

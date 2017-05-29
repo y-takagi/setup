@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+if hg root > /dev/null 2>&1; then
+    bookmark=`hg bookmark 2> /dev/null | awk '{ if($1=="*") print $2 }'`
+    if [ -n "$bookmark" ]; then
+        echo $bookmark
+    else
+        hg id -n 2> /dev/null
+    fi
+fi
