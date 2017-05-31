@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -e
+
+cmd=$1
+shift
+
+remote_head() {
+    hg identify --id "$(hg paths default)#$1" 2> /dev/null
+}
+
+current_rev() {
+    hg identify -n
+}
+
+case $cmd in
+    "br")
+        exec hg branches
+        ;;
+    "fetch")
+        exec hg pull
+        ;;
+    "undo")
+        exec hg revert --no-backup
+        ;;
+    "remote")
+        exec hg pull && hg update $(remote_head $1)
+        ;;
+    "merge")
+        exec hg merge $(remote_head $1)
+        ;;
+    "log")
+        exec hg log -G -b . --template "\033[1;33mcommit: {rev}:{node|short}{if(bookmarks, ' \033[46m\033[1;37m ', '')}{join(bookmarks, ' \033[0m \033[46m\033[1;37m ')}{if(bookmarks, ' \033[0m', '')}{if(tags, ' \033[45m\033[1;37m ', '')}{join(tags, ' \033[0m \033[45m\033[1;37m ')}{if(tags, ' \033[0m', '')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n" -r ::$(current_rev)
+        ;;
+    *)
+        exec hg $cmd $@
+esac
