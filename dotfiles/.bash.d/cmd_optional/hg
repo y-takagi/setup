@@ -14,23 +14,20 @@ current_rev() {
 
 case $cmd in
     "br")
-        exec hg branches
+        hg branches
         ;;
     "fetch")
-        exec hg pull
+        hg pull
         ;;
     "undo")
-        exec hg revert --no-backup
+        hg revert --no-backup
         ;;
     "remote")
-        exec hg pull && hg update $(remote_head $1)
-        ;;
-    "merge")
-        exec hg merge $(remote_head $1)
+        hg pull && hg update $(remote_head $1)
         ;;
     "log")
-        exec hg log -G -b . --template "\033[1;33mcommit: {rev}:{node|short}{if(bookmarks, ' \033[46m\033[1;37m ', '')}{join(bookmarks, ' \033[0m \033[46m\033[1;37m ')}{if(bookmarks, ' \033[0m', '')}{if(tags, ' \033[45m\033[1;37m ', '')}{join(tags, ' \033[0m \033[45m\033[1;37m ')}{if(tags, ' \033[0m', '')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n" -r ::$(current_rev)
+        hg log -G -b . --template "\033[1;33mcommit: {rev}:{node|short}{if(bookmarks, ' \033[46m\033[1;37m ', '')}{join(bookmarks, ' \033[0m \033[46m\033[1;37m ')}{if(bookmarks, ' \033[0m', '')}{if(tags, ' \033[45m\033[1;37m ', '')}{join(tags, ' \033[0m \033[45m\033[1;37m ')}{if(tags, ' \033[0m', '')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n" -r ::$(current_rev)
         ;;
     *)
-        exec hg $cmd $@
+        hg $cmd "$@"
 esac
