@@ -9,7 +9,7 @@ remote_head() {
 }
 
 current_rev() {
-    hg identify -n
+    hg identify -n | sed 's/[^0-9]*//g'
 }
 
 case $cmd in
