@@ -21,21 +21,28 @@ image=$1
 tag=$2
 IFS=$IFS_ORIGINAL
 
-# create 'home' volume if it doesn't exist
+# create 'home' volume if it doesn't exist.
 volume=`docker volume ls -q | grep -e "^home$"` && :
 if [ -z "$volume" ]; then
     docker volume create home
+fi
+
+# create 'dev' network if it doesn't exist.
+network=`docker network ls --filter name=dev | awk 'NR==2 {print $2}'` && :
+if [ -z "$network" ]; then
+    docker network create dev
 fi
 
 # exec if container is already running
 container_id=`docker ps -f name=$image-$tag -q`
 if [ "$image" != "base-buildpack" ]; then
     name_option="--name $image-$tag"
+    network_option="--network=dev --network-alias $image"
 fi
 
 if [ "$image" = "base-buildpack" ] || [ -z "$container_id" ]; then
     if [ "$(uname)" == "Darwin" ]; then
-        exec docker run --rm -it -u debian -w /home/debian -h $image $name_option -v home:/home/debian -v $HOME/.ssh:/home/debian/.ssh -v $HOME/Development/Docker:/macOS $docker_option $image_and_tag $cmd
+        exec docker run --rm -it -u debian -w /home/debian -h $image $name_option $network_option -v home:/home/debian -v $HOME/.ssh:/home/debian/.ssh -v $HOME/Development/Docker:/macOS $docker_option $image_and_tag $cmd
     else
         # look for ssh-agent path
         agent_path=`readlink $HOME/.ssh/agent`

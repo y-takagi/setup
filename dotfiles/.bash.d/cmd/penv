@@ -3,13 +3,45 @@ set -e
 exec 2> /dev/null
 
 current_path=`pwd`
+cmd=$1
+shift
 
-if which direnv > /dev/null; then
+if ! which direnv > /dev/null; then
+    echo "direnv: command not found"
+    exit 1
+fi
+
+init() {
+if [ -e "$current_path/.envrc" ]; then
+    echo ".envrc already exists."
+    exit 1
+fi
+
 cat <<- EOF > $current_path/.envrc
 path_add PYTHONUSERBASE .pip
 PATH_add .pip/bin
 EOF
+
 direnv allow .
-else
-    echo "direnv: command not found"
-fi
+}
+
+install() {
+    if [ -z "$PYTHONUSERBASE" ]; then
+        echo "Use need to run 'penv init' first."
+        exit 1
+    fi
+    pip install --user "$@"
+}
+
+case $cmd in
+    "init")
+        $(init)
+        ;;
+    "install")
+        $(install "$@")
+        ;;
+    *)
+        echo "command doesn't exist."
+        exit 1
+        ;;
+esac
