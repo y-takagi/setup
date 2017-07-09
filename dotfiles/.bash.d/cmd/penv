@@ -12,33 +12,27 @@ if ! which direnv > /dev/null; then
 fi
 
 init() {
-if [ -e "$current_path/.envrc" ]; then
-    echo ".envrc already exists."
-    exit 1
-fi
-
 cat <<- EOF > $current_path/.envrc
 path_add PYTHONUSERBASE .pip
 PATH_add .pip/bin
 EOF
-
 direnv allow .
-}
-
-install() {
-    if [ -z "$PYTHONUSERBASE" ]; then
-        echo "Use need to run 'penv init' first."
-        exit 1
-    fi
-    pip install --user "$@"
 }
 
 case $cmd in
     "init")
-        $(init)
+        if [ -e "$current_path/.envrc" ]; then
+            echo ".envrc already exists."
+            exit 1
+        fi
+        init
         ;;
     "install")
-        $(install "$@")
+        if [ -z "$PYTHONUSERBASE" ]; then
+            echo "Use need to run 'penv init' first."
+            exit 1
+        fi
+        pip install --user "$@"
         ;;
     *)
         echo "command doesn't exist."
