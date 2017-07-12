@@ -5,7 +5,7 @@ cmd=$1
 shift
 
 remote_head() {
-    hg identify --id "$(hg paths default)#$1" 2> /dev/null
+    hg identify --id "$(hg paths $1)#$2" 2> /dev/null
 }
 
 current_rev() {
@@ -24,13 +24,10 @@ case $cmd in
         fi
         ;;
     "fetch")
-        hg pull
+        hg pull $1
         ;;
     "log")
         hg log -G --template "\033[1;33mcommit: {rev}:{node|short}{if(bookmarks, ' \033[46m\033[1;37m ', '')}{join(bookmarks, ' \033[0m \033[46m\033[1;37m ')}{if(bookmarks, ' \033[0m', '')}{if(tags, ' \033[45m\033[1;37m ', '')}{join(tags, ' \033[0m \033[45m\033[1;37m ')}{if(tags, ' \033[0m', '')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n" -r ::$(current_rev)
-        ;;
-    "remote")
-        hg update $(remote_head $1)
         ;;
     "stash")
         if [ "$1" = "pop" ]; then
@@ -41,6 +38,14 @@ case $cmd in
         ;;
     "undo")
         hg revert --no-backup "$@"
+        ;;
+    "update")
+        remote_paths=(`hg paths | awk '{print $1}'`)
+        if [[ " ${remote_paths[*]} " == *" $1 "* ]]; then
+            hg update $(remote_head $1 $2)
+        else
+            hg update "$@"
+        fi
         ;;
     *)
         hg $cmd "$@"
