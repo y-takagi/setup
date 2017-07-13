@@ -5,7 +5,7 @@ cmd=$1
 shift
 
 remote_head() {
-    hg identify --id "$(hg paths $1)#$2" 2> /dev/null
+    hg identify --id "$(hg paths default)#$1" 2> /dev/null
 }
 
 current_rev() {
@@ -17,7 +17,7 @@ case $cmd in
         hg annotate -cdu "$@"
         ;;
     "br")
-        if [ -z "$@" ]; then
+        if [[ -z "$@" ]]; then
             hg branches
         else
             hg branch "$@"
@@ -40,9 +40,8 @@ case $cmd in
         hg revert --no-backup "$@"
         ;;
     "update")
-        remote_paths=(`hg paths | awk '{print $1}'`)
-        if [[ " ${remote_paths[*]} " == *" $1 "* ]]; then
-            hg update $(remote_head $1 $2)
+        if [ "$1" = "remote" ]; then
+            hg update $(remote_head $2)
         else
             hg update "$@"
         fi
