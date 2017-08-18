@@ -1,6 +1,0 @@
-#!/bin/bash
-set -e
-
-curl -o .gitignore --fail --show-error --silent https://raw.github.com/github/gitignore/master/$1.gitignore
-git init .
-git add .gitignore && git commit -m "Add gitignore"

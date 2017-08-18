@@ -29,13 +29,12 @@ case $cmd in
         ;;
     "install")
         if [ -z "$PYTHONUSERBASE" ]; then
-            echo "Use need to run 'penv init' first."
+            echo "Use need to run 'pip init' first."
             exit 1
         fi
         pip install --user "$@"
         ;;
     *)
-        echo "command doesn't exist."
-        exit 1
+        pip $cmd "$@"
         ;;
 esac
