@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
-while getopts o: opt
+while getopts o:h: opt
 do
     case $opt in
         o) docker_option=$OPTARG
+           ;;
+        h) container_name=$OPTARG
            ;;
     esac
 done
@@ -33,20 +35,25 @@ if [ -z "$network" ]; then
     docker network create dev
 fi
 
-# exec if container is already running
-container_id=`docker ps -f name=$image-$tag -q`
-if [ "$image" != "base-buildpack" ]; then
-    name_option="--name $image-$tag"
-    network_option="--network=dev --network-alias $image"
+# set container name.
+if [ -z "$container_name" ]; then
+    container_name="$image"
 fi
 
+if [ "$image" != "base-buildpack" ]; then
+    name_option="--name $container_name"
+    network_option="--network=dev --network-alias $container_name"
+fi
+
+# exec if container is already running
+container_id=`docker ps -f name=/^$container_name$ -q`
 if [ "$image" = "base-buildpack" ] || [ -z "$container_id" ]; then
     if [ "$(uname)" == "Darwin" ]; then
-        exec docker run --rm -it -u debian -w /home/debian -h $image $name_option $network_option -v home:/home/debian -v $HOME/.ssh:/home/debian/.ssh -v $HOME/Development/Docker:/macOS $docker_option $image_and_tag $cmd
+        exec docker run --rm -it -u debian -w /home/debian -h $container_name $name_option $network_option -v home:/home/debian -v $HOME/.ssh:/home/debian/.ssh -v $HOME/Development/Docker:/macOS $docker_option $image_and_tag $cmd
     else
         # look for ssh-agent path
         agent_path=`readlink $HOME/.ssh/agent`
-        exec docker run --rm -it -u debian -w /home/debian -h $image $name_option -v home:/home/debian -v $agent_path:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent $docker_option $image_and_tag $cmd
+        exec docker run --rm -it -u debian -w /home/debian -h $container_name $name_option -v home:/home/debian -v $agent_path:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent $docker_option $image_and_tag $cmd
     fi
 else
     exec docker exec -it $container_id bash --login
