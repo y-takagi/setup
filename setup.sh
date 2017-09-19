@@ -22,22 +22,15 @@ setup_emacs() {
 
 setup_peco() {
     mkdir ~/tmp && cd ~/tmp/
-    wget "https://github.com/peco/peco/releases/download/v0.4.7/peco_linux_amd64.tar.gz" | tar zxvf
+    wget "https://github.com/peco/peco/releases/download/v0.5.1/peco_linux_amd64.tar.gz" | tar zxvf
     sudo cp peco_linux_amd64/peco /usr/local/bin/
     rm -rf peco_linux_amd64 peco_linux_amd64.tar.gz
-}
-
-setup_all() {
-    setup_dotfiles
-    setup_ssh
-    setup_emacs
-    setup_peco
 }
 
 if [ -n "$1" ]; then
     setup_$1
 else
-    setup_all
+    setup_dotfiles
 fi
 
 cd $current_path

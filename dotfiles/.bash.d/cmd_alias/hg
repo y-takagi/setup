@@ -23,6 +23,13 @@ case $cmd in
             hg branch "$@"
         fi
         ;;
+    "changes")
+        if [[ -z "$@" ]]; then
+            hg plog $(hg slog | peco | awk "{print \$1}")
+        else
+            hg plog $(hg slog "$1" | peco | awk "{print \$1}") "$1"
+        fi
+        ;;
     "fetch")
         hg pull $1
         ;;

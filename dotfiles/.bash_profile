@@ -26,6 +26,7 @@ if which pyenv > /dev/null; then
 fi
 
 ## PATH
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.bash.d/cmd:$PATH
 export PATH=$HOME/.bash.d/gen_cmd:$PATH
