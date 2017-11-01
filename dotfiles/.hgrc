@@ -7,11 +7,11 @@ slog = log --template "{node|short} {date|isodate} {author|person} [{if(branch, 
 plog = log -p -r $1 --stat --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nBranch: {if(branch, '{branch}','default')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\033[31m---\033[0m\n"
 
 [extensions]
-pager=
 color=
+pager=
+purge=
 shelve=
 strip=
-purge=
 
 [pager]
 pager = LESS='FSRX' less

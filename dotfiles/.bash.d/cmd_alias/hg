@@ -25,7 +25,7 @@ case $cmd in
         ;;
     "changes")
         if [[ -z "$@" ]]; then
-            hg plog $(hg slog | peco | awk "{print \$1}")
+            hg plog $(hg slog -r "reverse(::$(current_rev))" | peco | awk "{print \$1}")
         else
             hg plog $(hg slog "$1" | peco | awk "{print \$1}") "$1"
         fi
@@ -35,6 +35,10 @@ case $cmd in
         ;;
     "log")
         hg log -G --template "\033[1;33mcommit: {rev}:{node|short}{if(bookmarks, ' \033[46m\033[1;37m ', '')}{join(bookmarks, ' \033[0m \033[46m\033[1;37m ')}{if(bookmarks, ' \033[0m', '')}{if(tags, ' \033[45m\033[1;37m ', '')}{join(tags, ' \033[0m \033[45m\033[1;37m ')}{if(tags, ' \033[0m', '')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\n" -r ::$(current_rev)
+        ;;
+    "reset")
+        hg revert --no-backup "$@"
+        hg purge
         ;;
     "stash")
         if [ "$1" = "pop" ]; then
