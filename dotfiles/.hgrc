@@ -6,6 +6,9 @@ ignore = ~/.hgignore_global
 slog = log --template "{node|short} {date|isodate} {author|person} [{if(branch, '{branch}','default')}] {desc|strip|firstline}\n"
 plog = log -p -r $1 --stat --template "\033[0;33mcommit: {node|short}\033[0m \033[31m{if(tags, '(tag: {tags})','')}\033[0m\nBranch: {if(branch, '{branch}','default')}\nAuthor: {author}\nDate:   {date|isodate}\n\n\t{desc|strip|fill68|tabindent}\n\033[31m---\033[0m\n"
 
+[merge-tools]
+filemergexcode.gui = False
+
 [extensions]
 color=
 pager=

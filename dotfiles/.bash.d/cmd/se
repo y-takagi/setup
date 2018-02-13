@@ -45,16 +45,16 @@ if [ "$image" != "base-buildpack" ]; then
     network_option="--network=dev --network-alias $container_name"
 fi
 
-# exec if container is already running
 container_id=`docker ps -f name=/^$container_name$ -q`
 if [ "$image" = "base-buildpack" ] || [ -z "$container_id" ]; then
     if [ "$(uname)" == "Darwin" ]; then
-        exec docker run --rm -it -u debian -w /home/debian -h $container_name $name_option $network_option -v home:/home/debian -v $HOME/.ssh:/home/debian/.ssh -v $HOME/Development/Docker:/macOS $docker_option $image_and_tag $cmd
+        exec docker run --rm -it -u debian -w /home/debian -h $container_name $name_option $network_option -v home:/home/debian -v $HOME/.ssh:/home/debian/.ssh:ro -v $HOME/Development/Docker:/macOS:ro $docker_option $image_and_tag $cmd
     else
         # look for ssh-agent path
         agent_path=`readlink $HOME/.ssh/agent`
         exec docker run --rm -it -u debian -w /home/debian -h $container_name $name_option -v home:/home/debian -v $agent_path:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent $docker_option $image_and_tag $cmd
     fi
 else
+    # exec if container is already running
     exec docker exec -it $container_id bash --login
 fi
