@@ -21,6 +21,7 @@
   path = ~/.gitconfig.local
 
 [alias]
+  cm = commit
   st = status --ignore-submodules=dirty
   df = diff --ignore-submodules=dirty
   co = checkout
