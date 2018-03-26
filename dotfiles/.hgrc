@@ -15,8 +15,13 @@ pager=
 purge=
 shelve=
 strip=
+mercurial_keyring =
 
 [pager]
 pager = LESS='FSRX' less
 quiet = True
 attend-plog = true
+
+[auth]
+rena.prefix = https://pj.renadev.com/rena
+rena.username = ytakagi

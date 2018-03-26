@@ -10,6 +10,7 @@ export EDITOR='emacsclient -t'
 export PAGER=less
 export _Z_DATA=$HOME/.zdata/.z
 export GOPATH=$HOME/.go
+export PIPENV_VENV_IN_PROJECT=1
 
 if [ "$(uname)" == 'Darwin' ] || [ "$(uname)" == 'FreeBSD' ]; then
     eval $(gdircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal)
