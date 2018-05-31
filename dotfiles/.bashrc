@@ -73,4 +73,4 @@ bind -x '"\C-xj": pcd'
 
 ## prompt
 PROMPT_DIRTRIM=2
-PS1="[\h@\w\$(_branch)]\$ "
+PS1="[\h@\w\$(__git_ps1)]\$ "

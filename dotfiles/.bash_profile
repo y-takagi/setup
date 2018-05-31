@@ -3,14 +3,19 @@
 #
 . ~/.bash.d/util.sh
 
+export ALTERNATE_EDITOR=""
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export EDITOR='emacsclient -t'
+export GOPATH=$HOME/.go
 export LANG=ja_JP.UTF-8
 export LESS='-g -i -M -R'
-export ALTERNATE_EDITOR=""
-export EDITOR='emacsclient -t'
 export PAGER=less
-export _Z_DATA=$HOME/.zdata/.z
-export GOPATH=$HOME/.go
 export PIPENV_VENV_IN_PROJECT=1
+export _Z_DATA=$HOME/.zdata/.z
+
+if [ -d "/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/" ]; then
+    export JAVA_HOME="/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/"
+fi
 
 if [ "$(uname)" == 'Darwin' ] || [ "$(uname)" == 'FreeBSD' ]; then
     eval $(gdircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal)
@@ -31,7 +36,8 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 export PATH=$HOME/.bash.d/cmd:$PATH
 export PATH=$HOME/.bash.d/gen_cmd:$PATH
-export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
 
 ## Load temporary settings
 load_or_create $HOME/.bash.d/local/profile.sh
