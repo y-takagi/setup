@@ -64,6 +64,7 @@ alias l='$ls_cmd --color=auto --group-directories-first'
 alias ll='l -ahl --time-style long-iso'
 alias pip='$HOME/.bash.d/cmd_alias/pip'
 alias repo='cd $(ghq list -p | peco)'
+alias rg='$HOME/.bash.d/cmd_alias/rg'
 alias s='ssh $(grep -h "^Host" ~/.ssh/config | peco | awk "{print \$2}")'
 alias tm='tmux a'
 
