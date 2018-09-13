@@ -3,6 +3,7 @@
 #
 . ~/.bash.d/util.sh
 
+## Environment Variable
 export ALTERNATE_EDITOR=""
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export EDITOR='emacsclient -t'
@@ -17,30 +18,27 @@ if [ -d "/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/" ]; th
     export JAVA_HOME="/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/"
 fi
 
+## Load temporary settings
+load_or_create $HOME/.bash.d/local/profile.sh
+
+## PATH
+export PATH=$HOME/.bash.d/cmd:$PATH
+export PATH=$HOME/.bash.d/gen_cmd:$PATH
+export PATH=$HOME/.anyenv/bin:$PATH
+export PATH=$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+export PATH=$GOPATH/bin:$PATH
+
+## Init
 if [ "$(uname)" == 'Darwin' ] || [ "$(uname)" == 'FreeBSD' ]; then
     eval $(gdircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal)
 elif [ "$(uname)" == 'Linux' ]; then
     eval $(dircolors $HOME/.bash.d/lib/dircolors-solarized/dircolors.ansi-universal --sh)
 fi
 
-if which rbenv > /dev/null; then
-    eval "$(rbenv init -)"
+if which anyenv > /dev/null; then
+    eval "$(anyenv init -)"
 fi
-
-if which pyenv > /dev/null; then
-    eval "$(pyenv init -)";
-fi
-
-## PATH
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-export PATH=$GOPATH/bin:$PATH
-export PATH=$HOME/.bash.d/cmd:$PATH
-export PATH=$HOME/.bash.d/gen_cmd:$PATH
-export PATH=$ANDROID_HOME/tools:$PATH
-export PATH=$ANDROID_HOME/platform-tools:$PATH
-
-## Load temporary settings
-load_or_create $HOME/.bash.d/local/profile.sh
 
 ## Keep SSH_AUTH_SOCK to see same path
 # agent="$HOME/.ssh/agent"
