@@ -40,6 +40,10 @@ if which anyenv > /dev/null; then
     eval "$(anyenv init -)"
 fi
 
+if which direnv > /dev/null; then
+    eval "$(direnv hook bash)"
+fi
+
 ## Keep SSH_AUTH_SOCK to see same path
 # agent="$HOME/.ssh/agent"
 # if [ -S "$SSH_AUTH_SOCK" ]; then
