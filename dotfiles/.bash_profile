@@ -4,9 +4,8 @@
 . ~/.bash.d/util.sh
 
 ## Environment Variable
-export ALTERNATE_EDITOR=""
 export ANDROID_HOME=$HOME/Library/Android/sdk
-export EDITOR='emacsclient -t'
+export EDITOR='emacs -Q'
 export GOPATH=$HOME/.go
 export LANG=ja_JP.UTF-8
 export LESS='-g -i -M -R'
