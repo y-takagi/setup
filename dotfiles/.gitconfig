@@ -36,7 +36,3 @@
 [ghq]
   root = ~/.ghq
   root = ~/.go/src
-
-[merge "mergepbx"]
-  name = Xcode project files merger
-  driver = mergepbx %O %A %B
