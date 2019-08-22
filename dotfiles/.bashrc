@@ -31,10 +31,6 @@ if [ -d "${HOME}/.bash.d" ] ; then
     echo == Loaded scripts under .bash.d/ ==
 fi
 
-if which direnv > /dev/null; then
-    eval "$(direnv hook bash)"
-fi
-
 ## Remove duplicates in PATH
 pathctl_uniq
 
