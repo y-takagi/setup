@@ -18,6 +18,11 @@ PROMPT_COMMAND='share_history'
 ## C-d によるログアウト入力を防止（100回までは無視する）
 IGNOREEOF=100
 
+## Init
+if which direnv > /dev/null; then
+    eval "$(direnv hook bash)"
+fi
+
 ## Load shell scripts
 if [ -d "${HOME}/.bash.d" ] ; then
     # clear generated cmds
@@ -37,6 +42,7 @@ pathctl_uniq
 ## Load temporary settings
 load_or_create $HOME/.bash.d/local/bashrc.sh
 
+## alias
 if [ "$(uname)" == 'Darwin' ] || [ "$(uname)" == 'FreeBSD' ]; then
     ls_cmd='gls'
     alias ps='ps aux'
@@ -44,8 +50,6 @@ elif [ "$(uname)" == 'Linux' ]; then
     ls_cmd='ls'
     alias ps='ps auxf'
 fi
-
-## alias
 alias dc='docker-compose'
 alias df='df -h'
 alias diff='git diff'
