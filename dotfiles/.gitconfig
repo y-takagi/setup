@@ -33,5 +33,5 @@
   up-sub = submodule foreach 'git pull origin master'
 
 [ghq]
-  root = ~/.ghq
   root = ~/.go/src
+  root = ~/.ghq
