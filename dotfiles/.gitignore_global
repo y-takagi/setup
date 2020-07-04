@@ -3,3 +3,4 @@
 .direnv/
 .pip/
 .node-version
+flycheck_*

@@ -57,10 +57,8 @@ alias dm='docker-machine'
 alias dps='docker ps -a'
 alias drm='docker rm $(docker ps -f status=exited -q)'
 alias dstat='dstat -Tclmdrn'
-alias hg='$HOME/.bash.d/cmd_alias/hg'
 alias l='$ls_cmd --color=auto --group-directories-first'
 alias ll='l -ahl --time-style long-iso'
-alias pip='$HOME/.bash.d/cmd_alias/pip'
 alias repo='cd $(ghq list -p | peco)'
 alias rg='$HOME/.bash.d/cmd_alias/rg'
 alias s='ssh $(grep -h "^Host" ~/.ssh/config | peco | awk "{print \$2}")'
@@ -72,4 +70,4 @@ bind -x '"\C-xj": pcd'
 
 ## prompt
 PROMPT_DIRTRIM=2
-PS1="[\h@\w\$(__git_ps1)]\$ "
+PS1="[\h@\w\$(__git_ps1)]\n\$ "
