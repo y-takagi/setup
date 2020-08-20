@@ -34,4 +34,4 @@
 
 [ghq]
   root = ~/.go/src
-  root = ~/.ghq
+  root = ~/ghq
