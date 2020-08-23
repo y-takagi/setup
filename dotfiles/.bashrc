@@ -5,15 +5,9 @@ fi
 
 ## history
 HISTSIZE=100000
-HISTCONTROL=ignoreboth
-HISTTIMEFORMAT='%F %T '
-## share history
-function share_history {
-    history -a
-    history -c
-    history -r
-}
-PROMPT_COMMAND='share_history'
+HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
+PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 ## C-d によるログアウト入力を防止（100回までは無視する）
 IGNOREEOF=100
