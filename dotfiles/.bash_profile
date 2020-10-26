@@ -39,6 +39,9 @@ if which anyenv > /dev/null; then
     eval "$(anyenv init -)"
 fi
 
+## ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+
 ## Keep SSH_AUTH_SOCK to see same path
 # agent="$HOME/.ssh/agent"
 # if [ -S "$SSH_AUTH_SOCK" ]; then
