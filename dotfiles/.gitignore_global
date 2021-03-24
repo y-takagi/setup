@@ -4,3 +4,4 @@
 .pip/
 .node-version
 flycheck_*
+.log/
