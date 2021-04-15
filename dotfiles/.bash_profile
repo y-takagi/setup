@@ -27,7 +27,6 @@ export PATH=$HOME/.anyenv/bin:$PATH
 export PATH=$ANDROID_HOME/tools:$PATH
 export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$GOPATH/bin:$PATH
-export PATH="$HOME/.cargo/bin:$PATH"
 
 ## Init
 if [ "$(uname)" == 'Darwin' ] || [ "$(uname)" == 'FreeBSD' ]; then
@@ -39,6 +38,9 @@ fi
 if which anyenv > /dev/null; then
     eval "$(anyenv init -)"
 fi
+
+## rustup
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
 ## ghcup-env
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
