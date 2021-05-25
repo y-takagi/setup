@@ -12,6 +12,7 @@ export LESS='-g -i -M -R'
 export PAGER=less
 export PIPENV_VENV_IN_PROJECT=1
 export _Z_DATA=$HOME/.zdata/.z
+export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
 
 if [ -d "/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/" ]; then
     export JAVA_HOME="/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/"
@@ -27,6 +28,7 @@ export PATH=$HOME/.anyenv/bin:$PATH
 export PATH=$ANDROID_HOME/tools:$PATH
 export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$GOPATH/bin:$PATH
+export PATH=$PYENV_ROOT/bin:$PATH
 
 ## Init
 if [ "$(uname)" == 'Darwin' ] || [ "$(uname)" == 'FreeBSD' ]; then
@@ -36,6 +38,9 @@ elif [ "$(uname)" == 'Linux' ]; then
 fi
 
 if which anyenv > /dev/null; then
+    if which pyenv > /dev/null; then
+        eval "$(pyenv init --path)"
+    fi
     eval "$(anyenv init -)"
 fi
 
