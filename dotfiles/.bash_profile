@@ -13,6 +13,7 @@ export PAGER=less
 export PIPENV_VENV_IN_PROJECT=1
 export _Z_DATA=$HOME/.zdata/.z
 export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+export DBC_USER=yukiya.takagi@every.tv
 
 if [ -d "/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/" ]; then
     export JAVA_HOME="/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/"
