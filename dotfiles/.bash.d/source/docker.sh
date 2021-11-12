@@ -2,6 +2,10 @@ if ! which docker > /dev/null; then
     return;
 fi
 
+if ! docker stats --no-stream &> /dev/null; then
+    return;
+fi
+
 gen_cmd() {
 cat <<- EOF > $HOME/.bash.d/gen_cmd/$cmd
 #!/bin/bash
